@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "name": "farms-for-life",
+  "version": "0.1",
+  "main": "app.js",
+  "repository": "git@github.com:jasonolmstead33/farms-for-life.git",
+  "author": ["jason olmstead", "aaron moore"],
+  "license": "MIT"
+}
