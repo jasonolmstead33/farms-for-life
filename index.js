@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 //App constants
 const port = process.env.PORT || 8081;
+const angularDist = './dist/farms-for-life-ordering';
 
 //Setup our config
 let config = {};
@@ -17,6 +18,7 @@ config = JSON.parse(content);
 //Middleware
 app.use(bodyParser.json()); // for parsing application/json
 app.use(cors());
+app.use(express.static(angularDist))
 
 let logRequest = (req, res, next) => {
     console.log(`[${new Date()}] ${req.method}: ${req.path}`)
@@ -59,6 +61,11 @@ app.post('/api/foods', logRequest, food.createFood);
 app.put('/api/foods/:id', logRequest, food.updateFood);
 app.delete('/api/foods/:id', logRequest, food.deleteFood);
 
-app.listen(port, () => console.log(`Example app listening on port :${port}`));
+// assume everything else is angular
+app.get('*', (req, res) => {
+    res.sendFile(`index.html`, { root: angularDist });
+  });
+
+app.listen(port, () => console.log(`Listening on port :${port}`));
 
 

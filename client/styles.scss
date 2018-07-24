@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@include mat-core();
+
+$palette-primary: mat-palette($mat-light-green);
+$palette-accent: mat-palette($mat-green);
+$palette-warn: mat-palette($mat-red);
+$palette-theme: mat-light-theme($palette-primary, $palette-accent, $palette-warn);
+
+$theme-primary: mat-color($palette-primary);
+$theme-accent: mat-color($palette-accent);
+$theme-warn: mat-color($palette-warn);
+
+@include angular-material-theme($palette-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+.warn {
+    color: $theme-warn;
+}
+
+@mixin md-icon-size($size: 24px) {
+    font-size: $size;
+    height: $size;
+    width: $size;
+    line-height: $size;
+}
