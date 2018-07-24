@@ -13,21 +13,21 @@ import {
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainNavComponent } from './main-nav/main-nav.component';
-import { HomeComponent } from './home/home.component';
 import { FarmInfoComponent } from './farms/farm-info/farm-info.component';
 import { FarmListComponent } from './farms/farm-list/farm-list.component';
 import { AgencyInfoComponent } from './agencies/agency-info/agency-info.component';
 import { AgencyListComponent } from './agencies/agency-list/agency-list.component';
+import { OrdersListComponent } from './orders/orders-list/orders-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
-    HomeComponent,
     FarmInfoComponent,
     FarmListComponent,
     AgencyInfoComponent,
-    AgencyListComponent
+    AgencyListComponent,
+    OrdersListComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +45,7 @@ import { AgencyListComponent } from './agencies/agency-list/agency-list.componen
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    FlexLayoutModule,
 
     AppRoutingModule,
   ],

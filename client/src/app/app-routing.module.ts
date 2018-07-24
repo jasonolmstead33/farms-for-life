@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FarmListComponent } from './farms/farm-list/farm-list.component';
 import { FarmInfoComponent } from './farms/farm-info/farm-info.component';
-import { HomeComponent } from './home/home.component';
 import { AgencyListComponent } from './agencies/agency-list/agency-list.component';
+import { OrdersListComponent } from './orders/orders-list/orders-list.component';
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
+    { path: '', redirectTo: '/orders', pathMatch: 'full' },
     { path: 'farms', component: FarmListComponent },
-    { path: 'farms/:id', component: FarmInfoComponent },
     { path: 'agencies', component: AgencyListComponent },
+    { path: 'orders', component: OrdersListComponent },
+    // { path: 'orders/:id', component: OrdersListComponent },
 ];
 
 @NgModule({
