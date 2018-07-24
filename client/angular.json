@@ -123,5 +123,10 @@
       }
     }
   },
-  "defaultProject": "farms-for-life-ordering"
+  "defaultProject": "farms-for-life-ordering",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

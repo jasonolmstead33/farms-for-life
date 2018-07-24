@@ -1,42 +1,50 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from '@angular/cdk/layout';
+import { RouterModule, Routes } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  MatToolbarModule, MatButtonModule, MatSidenavModule,
+  MatIconModule, MatListModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatCheckboxModule
+} from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
 import { MainNavComponent } from './main-nav/main-nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { FarmerOfferComponent } from './farmer-offer/farmer-offer.component';
 import { AgencyPreferenceComponent } from './agency-preference/agency-preference.component';
-
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent },
-  { path: 'agency', component: AgencyPreferenceComponent },
-  { path: 'farmer', component: FarmerOfferComponent },
-];
-
+import { FarmInfoComponent } from './farms/farm-info/farm-info.component';
+import { FarmListComponent } from './farms/farm-list/farm-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
     HomeComponent,
-    FarmerOfferComponent,
-    AgencyPreferenceComponent
+    AgencyPreferenceComponent,
+    FarmInfoComponent,
+    FarmListComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
+    ReactiveFormsModule,
+
     MatToolbarModule,
     MatButtonModule,
+    MatCardModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    RouterModule.forRoot(appRoutes),
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

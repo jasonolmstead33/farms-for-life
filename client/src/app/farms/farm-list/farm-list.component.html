@@ -1,0 +1,23 @@
+<mat-card>
+  <h3>Active Farms</h3>
+  <mat-nav-list>
+    <mat-list-item (click)="openDetailsDialog(farm)" *ngFor="let farm of activeFarms">
+      <button mat-icon-button color="warn" (click)=toggleActive(farm)>
+        <mat-icon>remove</mat-icon>
+      </button>
+      {{farm.name}}
+    </mat-list-item>
+  </mat-nav-list>
+</mat-card>
+
+<mat-card>
+  <h3>Inctive Farms</h3>
+  <mat-nav-list>
+    <mat-list-item (click)="openDetailsDialog(farm)" *ngFor="let farm of inactiveFarms">
+      <button mat-icon-button color="accent" (click)=toggleActive(farm)>
+        <mat-icon>add</mat-icon>
+      </button>
+      {{farm.name}}
+    </mat-list-item>
+  </mat-nav-list>
+</mat-card>
