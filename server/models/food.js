@@ -19,7 +19,7 @@ class Food {
         this.unit = obj.unit || ""
         this.unitPrice = obj.unitPrice || 0.00
         this.description = obj.description || obj.item
-        this.include = obj.include || true
+        this.include = obj.include || false
     }
 }
 
