@@ -2,15 +2,23 @@
   <h3>Active Farms</h3>
   <mat-nav-list>
     <mat-list-item (click)="openDetailsDialog(farm)" *ngFor="let farm of activeFarms">
-      <button mat-icon-button aria-label="testing123" color="warn" (click)=toggleActive(farm)>
-        <mat-icon aria-label="Move to Inactive">remove</mat-icon>
-      </button>
-      {{farm.name}}
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="list-item-container">
+        <span>
+          <button mat-icon-button aria-label="testing123" color="warn" (click)=toggleActive(farm)>
+            <mat-icon aria-label="Move to Inactive">remove</mat-icon>
+          </button>
+          {{farm.name}}
+        </span>
+        <span>{{farm.weight}}%</span>
+      </div>
     </mat-list-item>
   </mat-nav-list>
-  <button mat-raised-button color="primary" class="add-button" (click)=addNewFarm()>
-    <mat-icon>add</mat-icon> New Farm
-  </button>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="button-row">
+    <button mat-raised-button color="primary" class="add-button" (click)=addNewFarm()>
+      <mat-icon>add</mat-icon> New Farm
+    </button>
+    <span [class.warn]="weightOfActiveFarms() != 100">budget allocation: {{weightOfActiveFarms()}}%</span>
+  </div>
 </mat-card>
 
 <mat-card *ngIf="inactiveFarms.length > 0">
