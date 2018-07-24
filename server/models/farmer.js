@@ -15,6 +15,7 @@ class Farmer {
         this.PartitionKey = "farmer"
         this.RowKey = row
         this.name = obj.name || ""
+        this.address = obj.address || ""
         this.acreage = obj.acreage || ""
         this.season = obj.season || ""
         this.phone = obj.phone || ""

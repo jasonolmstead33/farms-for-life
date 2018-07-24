@@ -1,21 +1,21 @@
 //Local Modules
 const StorageClient = require('../data/storage');
-const Farmer = require('../models/farmer');
+const Agency = require('../models/agency');
 
 //Constants
-const FARMERS_TABLE = 'farmers';
-const FARMERS_PARTITION = 'farmer'
+const TABLE = 'farmers';
+const AGENCY_PARTITION = 'agency'
 
 //Properties
 let storageCli;
 
-class FarmersController {
+class AgencyController {
     constructor (config) {
         storageCli = new StorageClient(config)
     }
     
 
-    createFarmer(req, res) {
+    createAgency(req, res) {
         if (!storageCli) {
             return res.status(500).json({error: "StorageClient not initialized"})
         }
@@ -33,8 +33,8 @@ class FarmersController {
             req.body.phone = formatPhoneNumber(req.body.phone)
         }
 
-        let farmer = new Farmer(req.body)
-        return storageCli.create(FARMERS_TABLE, farmer)
+        let agency = new Agency(req.body)
+        return storageCli.create(TABLE, agency)
             .then(data => {
                 //TODO xform body. 
                 return res.status(201).json(data)
@@ -45,7 +45,7 @@ class FarmersController {
             })
     }
 
-    getFarmer(req, res) {
+    getAgency(req, res) {
         if (!storageCli) {
             return res.status(500).json({error: "StorageClient not initialized"})
         }
@@ -56,11 +56,11 @@ class FarmersController {
 
         let row = req.params.id
 
-        return storageCli.get(FARMERS_TABLE, FARMERS_PARTITION, row)
+        return storageCli.get(TABLE, AGENCY_PARTITION, row)
             .then(data => {            
                 //TODO xform body. 
                 let result = data;
-                result = cleanseFarmer(result)
+                result = cleanseAgency(result)
                 return res.status(200).json(data)               
             })
             .catch(err => {
@@ -69,19 +69,18 @@ class FarmersController {
             })
     }
 
-    listFarmers(req, res) {
+    listAgencies(req, res) {
         if (!storageCli) {
             return res.status(500).json({error: "StorageClient not initialized"})
         }
 
-        return storageCli.list(FARMERS_TABLE, FARMERS_PARTITION)
+        return storageCli.list(TABLE, AGENCY_PARTITION)
             .then(data => {
                 for (let i in data) {
-                    data[i] = cleanseFarmer(data[i])
+                    data[i] = cleanseAgency(data[i])
                 }
 
                 return res.status(200).json(data)
-                
             })
             .catch(err => {
                 console.log(err)
@@ -89,7 +88,7 @@ class FarmersController {
             })
     }
 
-    updateFarmer(req, res) {
+    updateAgency(req, res) {
         if (!storageCli) {
             return res.status(500).json({error: "StorageClient not initialized"})
         }
@@ -106,11 +105,11 @@ class FarmersController {
             req.body.phone = formatPhoneNumber(req.body.phone)
         }
 
-        let farmer = new Farmer(req.body)
-        return storageCli.update(FARMERS_TABLE, farmer)
+        let agency = new Agency(req.body)
+        return storageCli.update(TABLE, agency)
             .then(data => {
-                farmer = cleanseFarmer(farmer)
-                return res.status(200).json(farmer)
+                agency = cleanseAgency(agency)
+                return res.status(200).json(agency)
             })
             .catch(err => {
                 console.log(err)
@@ -118,7 +117,7 @@ class FarmersController {
             })
     }
 
-    deleteFarmer(req, res) {
+    deleteAgency(req, res) {
         if (!storageCli) {
             return res.status(500).json({error: "StorageClient not initialized"})
         }
@@ -131,9 +130,9 @@ class FarmersController {
             return res.status(400).json({error: "BadRequest"})
         }
 
-        let farmer = new Farmer({email: req.params.id});
+        let agency = new Agency({email: req.params.id});
         
-        return storageCli.delete(FARMERS_TABLE, farmer)
+        return storageCli.delete(TABLE, agency)
             .then(data => {
                 return res.status(200).json({status: "OK"})
             })
@@ -144,16 +143,16 @@ class FarmersController {
     }
 }
 
-module.exports = FarmersController;
+module.exports = AgencyController;
 
-//HELPERS 
+//HELPERS -- NEED TO MOVE TO Utils
 function formatPhoneNumber(s) {
     var s2 = (""+s).replace(/\D/g, '');
     var m = s2.match(/^(\d{3})(\d{3})(\d{4})$/);
     return (!m) ? null : "" + m[1] + "" + m[2] + "" + m[3];
 }
 
-function cleanseFarmer(result) {
+function cleanseAgency(result) {
     delete result["odata.metadata"]
     delete result["odata.etag"]
     delete result["PartitionKey"]
