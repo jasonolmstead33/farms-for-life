@@ -55,12 +55,12 @@ export class FarmListComponent implements OnInit {
         const farm: Farm = {
           id: `{this.allFarms.length + 1}`,
           name: data.name,
-          acres: data.acres,
+          acres: +data.acres,
           address: data.address,
           contact: data.contact,
           email: data.email,
           phone: data.phone,
-          weight: data.weight,
+          weight: +data.weight,
           isActive: data.isActive
         };
 
@@ -81,6 +81,10 @@ export class FarmListComponent implements OnInit {
         this.separateInactiveFarms();
       }
     }
+  }
+
+  weightOfActiveFarms(): number {
+    return this.activeFarms.reduce((sum, f) => sum + f.weight, 0);
   }
 
   private separateInactiveFarms() {

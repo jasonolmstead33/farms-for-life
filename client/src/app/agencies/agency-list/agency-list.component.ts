@@ -55,7 +55,7 @@ export class AgencyListComponent implements OnInit {
         const agency: Agency = {
           id: `${this.allAgencies.length + 1}`,
           name: data.name,
-          numberServed: data.numberServed,
+          numberServed: +data.numberServed,
           address: data.address,
           contact: data.contact,
           email: data.email,

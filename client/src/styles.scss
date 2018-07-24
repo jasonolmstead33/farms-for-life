@@ -19,6 +19,9 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }
 
+.warn {
+    color: $theme-warn;
+}
 
 @mixin md-icon-size($size: 24px) {
     font-size: $size;
