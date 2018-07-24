@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AgencyPreferenceComponent } from './agency-preference.component';
+import { OrdersListComponent } from './orders-list.component';
 
-describe('AgencyPreferenceComponent', () => {
-  let component: AgencyPreferenceComponent;
-  let fixture: ComponentFixture<AgencyPreferenceComponent>;
+describe('OrdersListComponent', () => {
+  let component: OrdersListComponent;
+  let fixture: ComponentFixture<OrdersListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AgencyPreferenceComponent ]
+      declarations: [ OrdersListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AgencyPreferenceComponent);
+    fixture = TestBed.createComponent(OrdersListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

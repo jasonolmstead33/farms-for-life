@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Farm } from 'src/app/contracts/farm';
 
@@ -10,7 +10,6 @@ import { Farm } from 'src/app/contracts/farm';
 })
 export class FarmInfoComponent implements OnInit {
   form: FormGroup;
-  description: string;
   farmData: Farm;
 
   constructor(
@@ -23,12 +22,12 @@ export class FarmInfoComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      name: [this.farmData.name, []],
-      contact: [this.farmData.contact, []],
-      email: [this.farmData.email, []],
-      address: [this.farmData.address, []],
+      name: [this.farmData.name, [Validators.required]],
+      contact: [this.farmData.contact, [Validators.required]],
+      email: [this.farmData.email, [Validators.required, Validators.email]],
+      address: [this.farmData.address, [Validators.required]],
       acres: [this.farmData.acres, []],
-      weight: [this.farmData.acres, []],
+      weight: [this.farmData.acres, [Validators.required, Validators.min(0), Validators.max(100)]],
       isActive: [this.farmData.isActive, []],
     });
   }
