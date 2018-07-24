@@ -26,10 +26,6 @@ export class FarmListComponent implements OnInit {
     this.inactiveFarms = this.allFarms.filter(f => !f.isActive);
   }
 
-  farmClick(): void {
-    console.log('clicked');
-  }
-
   openDetailsDialog(farm: Farm): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -38,7 +34,18 @@ export class FarmListComponent implements OnInit {
 
     const dialogRef = this.dialog.open(FarmInfoComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-      data => console.log('Dialog output:', data)
+      data => {
+        farm.name = data.name;
+        farm.acres = data.acres;
+        farm.address = data.address;
+        farm.contact = data.contact;
+        farm.email = data.email;
+        farm.phone = data.phone;
+        farm.weight = data.weight;
+        if (farm.isActive !== data.isActive) {
+          this.toggleActive(farm);
+        }
+      }
     );
   }
 

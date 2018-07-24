@@ -1,0 +1,23 @@
+<mat-card>
+  <h3>Active Agencies</h3>
+  <mat-nav-list>
+    <mat-list-item (click)="openDetailsDialog(agency)" *ngFor="let agency of activeAgencies">
+      <button mat-icon-button color="warn" (click)=toggleActive(agency)>
+        <mat-icon>remove</mat-icon>
+      </button>
+      {{agency.name}}
+    </mat-list-item>
+  </mat-nav-list>
+</mat-card>
+
+<mat-card>
+  <h3>Inctive Agencies</h3>
+  <mat-nav-list>
+    <mat-list-item (click)="openDetailsDialog(agency)" *ngFor="let agency of inactiveAgencies">
+      <button mat-icon-button color="accent" (click)=toggleActive(agency)>
+        <mat-icon>add</mat-icon>
+      </button>
+      {{agency.name}}
+    </mat-list-item>
+  </mat-nav-list>
+</mat-card>
