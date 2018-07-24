@@ -1,0 +1,33 @@
+<mat-card>
+  <h3>Active Agencies</h3>
+  <mat-nav-list>
+    <mat-list-item (click)="openDetailsDialog(agency)" *ngFor="let agency of activeAgencies">
+      <button mat-icon-button aria-label="testing123" color="warn" (click)=toggleActive(agency)>
+        <mat-icon aria-label="Move to Inactive">remove</mat-icon>
+      </button>
+      {{agency.name}}
+    </mat-list-item>
+  </mat-nav-list>
+  <button mat-raised-button color="primary" class="add-button" (click)=addNewAgency()>
+    <mat-icon>add</mat-icon> New Agency
+  </button>
+</mat-card>
+
+<mat-card *ngIf="inactiveAgencies.length > 0">
+  <h3>Inctive Agencies</h3>
+  <mat-nav-list>
+    <mat-list-item (click)="openDetailsDialog(agency)" *ngFor="let agency of inactiveAgencies">
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="list-item-container">
+        <span>
+          <button mat-icon-button color="accent" (click)="toggleActive(agency)">
+            <mat-icon>add</mat-icon>
+          </button>
+          {{agency.name}}
+        </span>
+        <button mat-icon-button color="warn" class="delete-button" (click)="delete(agency)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+  </mat-nav-list>
+</mat-card>
