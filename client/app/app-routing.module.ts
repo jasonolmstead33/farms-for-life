@@ -4,12 +4,14 @@ import { FarmListComponent } from './farms/farm-list/farm-list.component';
 import { FarmInfoComponent } from './farms/farm-info/farm-info.component';
 import { AgencyListComponent } from './agencies/agency-list/agency-list.component';
 import { OrdersListComponent } from './orders/orders-list/orders-list.component';
+import { FoodsListComponent } from './foods/foods-list/foods-list.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/orders', pathMatch: 'full' },
     { path: 'farms', component: FarmListComponent },
     { path: 'agencies', component: AgencyListComponent },
     { path: 'orders', component: OrdersListComponent },
+    { path: 'foods', component: FoodsListComponent },
     // { path: 'orders/:id', component: OrdersListComponent },
 ];
 

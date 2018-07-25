@@ -1,0 +1,42 @@
+<mat-dialog-content [formGroup]="form">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="item" [matAutocomplete]="namesAuto">
+        <mat-autocomplete #namesAuto="matAutocomplete">
+            <mat-option *ngFor="let name of foodNamesAutocomplete" [value]="name">{{name}}</mat-option>
+          </mat-autocomplete>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput placeholder="Type" formControlName="type" [matAutocomplete]="typesAuto">
+        <mat-autocomplete #typesAuto="matAutocomplete">
+            <mat-option *ngFor="let type of foodTypesAutocomplete" [value]="type">{{type}}</mat-option>
+          </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Unit" formControlName="unit" [matAutocomplete]="unitsAutocomplete">
+        <mat-autocomplete #unitsAutocomplete="matAutocomplete">
+            <mat-option *ngFor="let unit of unitsAutocomplete" [value]="unit">{{unit}}</mat-option>
+          </mat-autocomplete>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput placeholder="Unit Price" formControlName="unitPrice">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input matInput placeholder="Description" formControlName="description">
+      </mat-form-field>
+  
+    <mat-checkbox formControlName="include">Include</mat-checkbox>
+  </mat-dialog-content>
+  
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+</mat-dialog-actions>

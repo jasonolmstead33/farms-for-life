@@ -9,7 +9,7 @@ const FOOD_PARTITION = 'food'
 //Properties
 let storageCli;
 
-class AgencyController {
+class FoodController {
     constructor (config) {
         storageCli = new StorageClient(config)
     }
@@ -57,7 +57,8 @@ class AgencyController {
             })
             .catch(err => {
                 console.log(err)
-                return res.status(500).json({error: err.toString()})
+                let statusCode = err.statusCode || 500;
+                return res.status(statusCode).json({error: err.toString()})
             })
     }
 
@@ -76,7 +77,8 @@ class AgencyController {
             })
             .catch(err => {
                 console.log(err)
-                return res.status(500).json({error: err.toString()})
+                let statusCode = err.statusCode || 500;
+                return res.status(statusCode).json({error: err.toString()})
             })
     }
 
@@ -97,7 +99,8 @@ class AgencyController {
             })
             .catch(err => {
                 console.log(err)
-                return res.status(500).json({error: err.toString()})
+                let statusCode = err.statusCode || 500;
+                return res.status(statusCode).json({error: err.toString()})
             })
     }
 
@@ -118,12 +121,13 @@ class AgencyController {
             })
             .catch(err => {
                 console.log(err)
-                return res.status(500).json({error: err.toString()})
+                let statusCode = err.statusCode || 500;
+                return res.status(statusCode).json({error: err.toString()})
             })
     }
 }
 
-module.exports = AgencyController;
+module.exports = FoodController;
 
 //HELPERS -- NEED TO MOVE TO Utils
 

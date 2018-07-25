@@ -41,7 +41,8 @@ class FarmersController {
             })
             .catch(err => {
                 console.log(err)
-                return res.status(500).json({error: err.toString()})
+                let statusCode = err.statusCode || 500;
+                return res.status(statusCode).json({error: err.toString()})
             })
     }
 
@@ -65,7 +66,8 @@ class FarmersController {
             })
             .catch(err => {
                 console.log(err)
-                return res.status(500).json({error: err.toString()})
+                let statusCode = err.statusCode || 500;
+                return res.status(statusCode).json({error: err.toString()})
             })
     }
 
@@ -85,7 +87,8 @@ class FarmersController {
             })
             .catch(err => {
                 console.log(err)
-                return res.status(500).json({error: err.toString()})
+                let statusCode = err.statusCode || 500;
+                return res.status(statusCode).json({error: err.toString()})
             })
     }
 
@@ -114,7 +117,8 @@ class FarmersController {
             })
             .catch(err => {
                 console.log(err)
-                return res.status(500).json({error: err.toString()})
+                let statusCode = err.statusCode || 500;
+                return res.status(statusCode).json({error: err.toString()})
             })
     }
 
@@ -139,7 +143,8 @@ class FarmersController {
             })
             .catch(err => {
                 console.log(err)
-                return res.status(500).json({error: err.toString()})
+                let statusCode = err.statusCode || 500;
+                return res.status(statusCode).json({error: err.toString()})
             })
     }
 }
