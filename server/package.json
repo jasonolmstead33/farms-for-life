@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "azure": "^2.3.1-preview",
+    "azure-storage": "^2.10.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "csv-parse": "^2.5.0",
+    "express": "^4.16.3"
+  },
+  "name": "farms-for-life",
+  "version": "0.0.1",
+  "main": "app.js",
+  "repository": "git@github.com:jasonolmstead33/farms-for-life.git",
+  "contributors": [
+    "Jason Olmstead",
+    "Aaron Moore"
+  ],
+  "license": "MIT"
+}
