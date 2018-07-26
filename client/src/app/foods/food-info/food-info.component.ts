@@ -1,8 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+
 import { Food } from '../../contracts/food';
-import { FoodDataService } from '../food-data.service';
 
 @Component({
   selector: 'app-food-info',
@@ -11,32 +13,33 @@ import { FoodDataService } from '../food-data.service';
 })
 export class FoodInfoComponent implements OnInit {
   public form: FormGroup;
-  public foodNamesAutocomplete: Set<string>;
-  public foodTypesAutocomplete: Set<string>;
-  public unitsAutocomplete: Set<string>;
+
+  public filterednames: Observable<string[]>;
+  public filteredtypes: Observable<string[]>;
+  public filteredunits: Observable<string[]>;
+  public isCreate: boolean = false;
 
   private foodData: Food;
   private allFoods: Food[];
+  private names: Set<string>;
+  private types: Set<string>;
+  private units: Set<string>;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<FoodInfoComponent>,
-    private foodDataService: FoodDataService,
-    @Inject(MAT_DIALOG_DATA) food: Food
+    @Inject(MAT_DIALOG_DATA) data: any
   ) {
-    this.foodData = food;
+    this.foodData = data.food;
+    this.isCreate = data.isCreate;
+    this.allFoods = data.allFoods
+
+    this.names = new Set(this.allFoods.map(f => f.item));
+    this.types = new Set(this.allFoods.map(f => f.type));
+    this.units = new Set(this.allFoods.map(f => f.unit));
   }
 
   ngOnInit() {
-    this.foodDataService.list().subscribe(
-      foodList => {
-        this.allFoods = foodList;
-        this.foodNamesAutocomplete = new Set(this.allFoods.map(f => f.item));
-        this.foodTypesAutocomplete = new Set(this.allFoods.map(f => f.type));
-        this.unitsAutocomplete = new Set(this.allFoods.map(f => f.unit));
-      }
-    );
-
     this.form = this.fb.group({
       item: [this.foodData.item, [Validators.required]],
       type: [this.foodData.type, [Validators.required]],
@@ -45,15 +48,29 @@ export class FoodInfoComponent implements OnInit {
       description: [this.foodData.description, []],
       include: [this.foodData.include, []],
     });
+
+    this.filterednames = this.getFilterObservable('item', this.names, 1);
+    this.filteredtypes = this.getFilterObservable('type', this.types);
+    this.filteredunits = this.getFilterObservable('unit', this.units);
+  }
+
+  hasBlankRequiredFields() {
+    const formData = this.form.value;
+    return !formData || !formData.item || formData.item === ''
+      || !formData.unit || formData.unit === ''
+      || !formData.type || formData.type === ''
+      || !formData.unitPrice || formData.unitPrice === '';
   }
 
   save() {
-    const formData = this.form.value;
-    if (!formData || !formData.item || formData.item === ''
-        || !formData.unit || formData.unit === ''
-        || !formData.type || formData.type === ''
-        || !formData.unitPrice || formData.unitPrice === '') {
-      alert('You must fill out all required form fields to save');
+    if (this.isCreate && this.names.has(this.form.value.item)) {
+      alert(`Entry already exists for ${this.form.value.item}. Choose a different name or update the existing entry`);
+      return;
+    }
+
+    const price = Number(this.form.value.unitPrice);
+    if (isNaN(price) || price <= 0) {
+      alert('Invalid unit price');
       return;
     }
     this.dialogRef.close(this.form.value);
@@ -63,9 +80,16 @@ export class FoodInfoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private _filter(allValues: Set<string>, value: string): string[] {
+  private filter(allValues: Set<string>, value: string): string[] {
     const filterValue = value.toLowerCase();
     const returnArray = Array.from(allValues);
     return returnArray.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  private getFilterObservable(formControlName: string, dataSource: Set<string>, startAfter: number = 0) {
+    return this.form.get(formControlName).valueChanges.pipe(
+      startWith(''),
+      map(val => val.length >= startAfter ? this.filter(dataSource, val) : [])
+    );
   }
 }

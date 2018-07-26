@@ -17,4 +17,12 @@ export class FoodDataService {
   list(): Observable<Food[]> {
     return this.http.get<Food[]>(this.baseRoute);
   }
+
+  create(food: Food): Observable<Food> {
+    return this.http.post<Food>(this.baseRoute, food);
+  }
+
+  delete(food: Food): Observable<Food> {
+    return this.http.delete<Food>(`${this.baseRoute}/${food.item}`);
+  }
 }

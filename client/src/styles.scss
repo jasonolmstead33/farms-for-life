@@ -23,6 +23,10 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
     color: $theme-warn;
 }
 
+.disabled {
+    background-color: #fafafa;
+}
+
 @mixin md-icon-size($size: 24px) {
     font-size: $size;
     height: $size;
